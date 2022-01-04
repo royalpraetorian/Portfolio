@@ -1,0 +1,20 @@
+<form id="emailForm" action="mailto:lonelevelsands@gmail.com" method="POST" enctype="multipart/form-data" name="EmailForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+    <p>Email Me</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input formControlName="Name" for="Name" matInput required type="email" >
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input formControlName="Email" for="Email" matInput required>
+    </mat-form-field>
+    <mat-form-field id="messageField" appearance="fill">
+        <mat-label>Message</mat-label>
+        <textarea formControlName="Message" for="Message" matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="6" required></textarea>
+    </mat-form-field>
+    <button id="submitButton" mat-raised-button color="warn">Send</button>
+</form>
