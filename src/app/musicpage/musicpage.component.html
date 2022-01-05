@@ -1,11 +1,11 @@
-<mat-grid-list cols="4" rowHeight="5px" gutterSize="10px">
-    <mat-grid-tile colspan="1" rowspan="15">
+<mat-grid-list [cols]="columns" rowHeight="1:0.01" gutterSize="1%" (window:resize)="onResize($event)">
+    <mat-grid-tile colspan="1" rowspan="26">
         <app-displaybox>
             <img backdrop src="https://lh3.googleusercontent.com/rFUvuVurZpBycHlF3AmYIfGJqzwAir9sCOoZmduGgIi04aw7zCPskd07bnPNaO2Q6D20MxDbCJ0_Ypup_Fn9pn1WO6WwGYoq0Cug3mita091GWYEg2XI_PuE6M2j9e5b5aUYL7KjG4ORL1lS2KxFMECgx71gGBJUQWpKSEzYfJ26D0ctZUiemk-VG6QuCINsJprAhg8ytMR18BUC6jYHRjAyps8hxAVuYzKPKtJr4bwuLrj8ZQiWyP311Pc5AxMR1csj2AtTLo07AZRUgb0KGpEEAx4X6wO2n6PPI4AJwwtbDmLcTirnD2LI3rj_t5At4LlYLtJmQp5_bdY4b3jdZJ6Kgfu0UixTLAJyBzfNgyDAdkmMZ7yNZmhc6blXt71YgO2LiWOoeJfHO3mmx79ffVRXFMfhKNvkd22HMBXiM58jEDcE_YdmzsfnPWtEb3ZFH8sBY3oyCTlMJiFmegf5ECDWF0erc-xrVC1KpV_UoH6UfclInhXfXhsJdRAv3L6UGZUq2Rt2clFqRYEiowevXVGSj9RT-Qov3H2G3BOxAKUPvhGApfPG7phbm-QKMyqILlRP41eT1oQYj0q0Yk3Dr5NmK_ioSTBKfNAnN9S_ZFt7Ctq-lBsPeQs3BLBIX385AJOPkcP_isH6v1jPNe70GYlWZEZf3_agKTJZbV8hlrzANJXLH8NCcgDXdZ70brmzW8fDZyPiyQI5bhdsf67HAOI=w477-h250-no?authuser=0">
             <button (click)="openTab('https://www.youtube.com/channel/UCERImkW_pOgn_ocj7HApmIg')" overlay mat-raised-button color="warn">My Youtube</button>
         </app-displaybox>
     </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="26">
+    <mat-grid-tile colspan="1" rowspan="46">
         <iframe src="https://open.spotify.com/embed/playlist/41w7JMfHRR9OnfZosICDIC?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="20">
@@ -14,8 +14,8 @@
         </form>
     </mat-grid-tile>
     <div *ngFor="let video of videos; index as i;">
-        <mat-grid-tile colspan="1" rowspan="20">
-            <youtube-player videoId="{{video.snippet.resourceId.videoId}}" [width]="420" [height]="290"></youtube-player>
+        <mat-grid-tile colspan="1" rowspan="35">
+            <youtube-player videoId="{{video.snippet.resourceId.videoId}}" [width]="videoWidth" [height]="videoHeight"></youtube-player>
             <!-- <app-displaybox>
                 <img backdrop src={{video.snippet.thumbnails.high.url}}/>
                 <button overlay mat-raised-button color="warn" (click)="openYoutubeLink(video.snippet.resourceId.videoId)">{{video.snippet.title}}</button>

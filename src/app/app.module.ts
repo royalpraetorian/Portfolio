@@ -20,6 +20,7 @@ import { ContactService } from './contact.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { WritingpageComponent } from './writingpage/writingpage.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HomepageComponent,
     DisplayboxComponent,
     MusicpageComponent,
-    ContactpageComponent
+    ContactpageComponent,
+    WritingpageComponent
   ],
   imports: [
     BrowserModule,

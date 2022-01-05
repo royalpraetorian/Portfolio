@@ -16,9 +16,15 @@ export class MusicpageComponent implements OnInit {
   private youtubeService: YoutubeService = new YoutubeService(new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() })));
   public videos!: any[];
   private apiLoaded=false;
+
+  public videoWidth: number = 420;
+  public videoHeight: number = 290;
+  public columns: number = 4;
+
   constructor() {}
 
     async ngOnInit() {
+    this.resize(window.innerWidth);
     if (!this.apiLoaded) {
       const tag  = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
@@ -30,9 +36,36 @@ export class MusicpageComponent implements OnInit {
     console.log(this.videos);
   }
 
-  public getEmbed(videoID: string)
+  onResize(event?: any){
+
+    this.resize(event.target.innerWidth);
+
+  }
+
+  private resize (screenWidth: number)
   {
-    
+    if(screenWidth <= 500) { 
+      this.columns = 1;
+      this.videoWidth = screenWidth*(0.9/this.columns); 
+    }
+    else if(screenWidth <= 1000) {
+      this.columns = 2;
+      this.videoWidth = screenWidth*(0.9/this.columns); 
+    }
+    else if(screenWidth <= 1500) { 
+      this.columns = 3;
+      this.videoWidth = screenWidth*(0.9/this.columns); 
+    }
+    else { 
+      this.columns = 4; 
+      this.videoWidth = screenWidth*(0.9/this.columns); 
+    }
+    this.updateVideoHeight();
+  }
+
+  private updateVideoHeight()
+  {
+    this.videoHeight = this.videoWidth*0.69047619047;
   }
 
   public openYoutubeLink(videoID: string)
