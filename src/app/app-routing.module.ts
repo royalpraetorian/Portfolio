@@ -5,11 +5,19 @@ import { MusicpageComponent } from './musicpage/musicpage.component';
 import { RecaptchaModule  } from 'ng-recaptcha';
 import { BrowserModule } from '@angular/platform-browser';
 import { ContactpageComponent } from './contactpage/contactpage.component';
+import { WritingpageComponent } from './writingpage/writingpage.component';
+import { BooksTabComponent } from './writingpage/books-tab/books-tab.component';
+import { GamesTabComponent } from './writingpage/games-tab/games-tab.component';
+import { PoetryTabComponent } from './writingpage/poetry-tab/poetry-tab.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'music', component: MusicpageComponent},
-  { path: 'contact', component: ContactpageComponent}
+  { path: 'contact', component: ContactpageComponent},
+  { path: 'writing', component: WritingpageComponent},
+  {path: 'writing/books', component: BooksTabComponent},
+  {path: 'writing/poetry', component: PoetryTabComponent},
+  {path: 'writing/games', component: GamesTabComponent},
 ];
 
 @NgModule({

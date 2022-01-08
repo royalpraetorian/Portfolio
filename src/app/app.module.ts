@@ -20,7 +20,12 @@ import { ContactService } from './contact.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {MatCardModule} from '@angular/material/card';
 import { WritingpageComponent } from './writingpage/writingpage.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { BooksTabComponent } from './writingpage/books-tab/books-tab.component';
+import { PoetryTabComponent } from './writingpage/poetry-tab/poetry-tab.component';
+import { GamesTabComponent } from './writingpage/games-tab/games-tab.component'; 
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { WritingpageComponent } from './writingpage/writingpage.component';
     DisplayboxComponent,
     MusicpageComponent,
     ContactpageComponent,
-    WritingpageComponent
+    WritingpageComponent,
+    BooksTabComponent,
+    PoetryTabComponent,
+    GamesTabComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +49,12 @@ import { WritingpageComponent } from './writingpage/writingpage.component';
     MatGridListModule,
     MatButtonModule,
     HttpClientModule,
+    MatTabsModule,
     RecaptchaModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatCardModule,
     ReactiveFormsModule,
     YouTubePlayerModule,
     NgxSpinnerModule
