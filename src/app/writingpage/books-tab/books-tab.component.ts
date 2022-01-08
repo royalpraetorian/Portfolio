@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books-tab',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksTabComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -15,6 +16,11 @@ export class BooksTabComponent implements OnInit {
   public openTab(url: string)
   {
     window.open(url, '_blank')?.focus();
+  }
+
+  public routeTo(route: string)
+  {
+    this.router.navigateByUrl(route);
   }
 
 }
