@@ -15,11 +15,16 @@ export class ContactpageComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   formBuilder = new FormBuilder();
   formGroup!: FormGroup;
-  contact!: ContactService;
+  submitted: boolean = false;
+  isLoading: boolean = false;
+  responseMessage!: string;
 
-  constructor(private _ngZone: NgZone, contact: ContactService) {
-
-    this.contact = contact;
+  constructor(private _ngZone: NgZone, private http: HttpClient) {
+    this.formGroup = this.formBuilder.group({
+      Name: new FormControl('', [Validators.required]),
+      Email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+      Message: new FormControl('', Validators.required)
+    })
 
    }
 
@@ -38,22 +43,38 @@ export class ContactpageComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.formGroup = this.formBuilder.group({
-      Name: new FormControl('', [Validators.required]),
-      Email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
-      Message: new FormControl('', Validators.required)
-    })
   }
 
-  onSubmit(FormData: FormGroup) {
-    console.log(FormData)
-    this.contact.PostMessage(FormData)
-    .subscribe(response => {
-    location.href = 'https://mailthis.to/confirm'
-    console.log(response)
-    }, error => {
-    console.warn(error.responseText)
-    console.log({ error })
-    })}
+  onSubmit() {
+    if(this.formGroup.status == "VALID")
+    {
+      this.formGroup.disable();
+      var formData: any = new FormData();
+      formData.append("name", this.formGroup.get("Name")?.value);
+      formData.append("email", this.formGroup.get("Email")?.value);
+      formData.append("message", this.formGroup.get("Message")?.value);
+      this.isLoading = true;
+      this.submitted = false;
+      this.http.post("https://script.google.com/macros/s/AKfycbyUQVEmBhM5rdLso1a2iA7Xft1ZM5CHDjSaR1qwffo6PJvcE4py-1Ff-5zimIFB3l35EA/exec", formData).subscribe(
+        (response: any) => {
+          if(response.result == "success") {
+            this.responseMessage = "Lovely to hear from you, friend.";
+          }
+          else {
+            this.responseMessage = "Oh dear, something wasn't quite right. Reload the page (F5) and try again.";
+          }
+          this.formGroup.enable();
+          this.submitted = true;
+          this.isLoading = false;
+        },
+        (error: any) => {
+          this.responseMessage = "There was an error, reload the page (F5) and try again.";
+          this.formGroup.enable;
+          this.submitted = true;
+          this.isLoading = false;
+        }
+      )
+    }
+  }
 
 }
