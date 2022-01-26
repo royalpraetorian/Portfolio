@@ -1,9 +1,11 @@
 <form id="emailForm" method="post" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <p>Email Me</p>
+    <p class="title">Email Me</p>
+    <p>How Do I Address You?</p>
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input formControlName="Name" for="Name" matInput required type="email" >
     </mat-form-field>
+    <p>Where Can I Reach You?</p>
     <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input formControlName="Email" for="Email" matInput required>
@@ -18,7 +20,6 @@
     </mat-form-field>
     <button [disabled]="isLoading" id="submitButton" type="submit" mat-raised-button color="warn">Send</button>
     <div [ngClass]="!submitted? 'hidden' : 'visible'" id="responseMessage">
-        <!-- <span>{{responseMessage}}</span> -->
-        <span>Lovely to hear from you, friend.</span>
+        <span>{{responseMessage}}</span>
     </div>
 </form>

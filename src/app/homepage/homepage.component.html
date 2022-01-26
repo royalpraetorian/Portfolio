@@ -1,4 +1,25 @@
-<mat-grid-list [cols]="columns" rowHeight="1:0.01" gutterSize="1%" (window:resize)="onResize($event)">
+<mat-card class="intro-card">
+    <mat-card-header class="intro-header">
+      <div mat-card-avatar class="intro-header-image"></div>
+      <mat-card-title>Me</mat-card-title>
+      <mat-card-subtitle>Musician, Author, Full Stack Developer</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://lh3.googleusercontent.com/rbQUcrNbEbrcj2khJ-EF78NGBC3I9avr13Yyvvl1Bp3vfhGozYmwJDB1Or7YqCvNJQHFpGDjdr3AZl0HiYMPisjASYoTkNnxxHITdw-il64ebvXbj3N2-ff4O1JK-0QeetdB1tVn7sGqNB2NjQq8SwKjri9nM8dnhUrMFXFu4y-BTI9IH5oLSNvO-vgVtpdsR2KpXk4b6aY9alBFxF_JtTNbKo_J2X4Hbx3d28BzoA6C_vjuoIJWfYhnbT_imrQpSG4ApviZCy9iDmlavQLeOG4PpZVBGqi1v3PE1xkOicqDlBPz8ect-gg2iGtCvLK9-hur6LxavtmHyELlMLyH5sliVDOH9ZPkM1blj8nXlekw768w__hClzL7dMxmXjvafXpZlq3Xka6oEAlwK8CTGzkziP9c1KgNbE9Y7XE8F2MBtXKM6xZ199JYb1mmbsIOZqMW_8ld0LiiUeGEuUoyvijltrCKZdvK3l9gr29rNel1E3cm-tvSXb6T6cPl7mdKwXxpwBFmhkdmxPK4XtRps8W1Xcd0AOAhzRFtB7f8c1AlooZJvCrmnrMZHPeZB4K1aTnikVCqwXyUI5gCMlc0WLjBITEJ45O4Gxt0MHgd2mGAT8L5eMyPAj4CMM7Knyy1Qlb7DISaARAdf-p7pSxo0djYc2gbddgzr_H2rOaXK-XdrgqTeguKrKndQGROSz5ccGY3CJ_GmhLj_kXXgGPaCk8=w945-h927-no?authuser=0" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        Hi! My name is Chris. I'm pretty great. I'm writing a book and designing a game, I stream, I play two instruments and often write my own music, and I'm a proficient programmer. I'm {{age}} years old. I've sailed across the Atlantic ocean twice, visited five continents, and lived in three. I'm a dual citizen (English/American) and I'm always eager to travel more. Someday, I think you're gonna hear my name a lot!
+    </p>
+    </mat-card-content>
+    <mat-card-actions class="intro-actions">
+        <button (click)="openTab('https://www.linkedin.com/in/lonelevelsands/')" overlay mat-raised-button color="warn">LinkedIn</button>
+        <button (click)="openTab('https://github.com/royalpraetorian?tab=repositories')" overlay mat-raised-button color="warn">GitHub</button>
+        <button (click)="openTab('https://www.twitch.tv/yiwmsh')" overlay mat-raised-button color="warn">Twitch</button>
+        <button (click)="openTab('https://www.youtube.com/channel/UCERImkW_pOgn_ocj7HApmIg')" overlay mat-raised-button color="warn">Youtube</button>
+    </mat-card-actions>
+  </mat-card>
+  
+
+<!-- <mat-grid-list [cols]="columns" rowHeight="1:0.01" gutterSize="1%" (window:resize)="onResize($event)">
     <mat-grid-tile colspan="1" rowspan="50">
         <app-displaybox class="bio">
             <img backdrop src="https://lh3.googleusercontent.com/brP-1Y3qeKzzGC3TLKbk-_mWMSiHjYhNuBxTrXflSQ2Z4jOFQPlrA0QOy-_TLsfCGPEoHNcXy-m-HMzU8RUPqm6LwIWes-_dgfzp6xRgIocg7LFkfoDqvPPCeST_SKk0wzFaAHM3yQk_dVuM_Pbm1ORrRwreoDhqwIK1zDPOKwFU2DFE3zoHW-s-oLNeFEAHRxnnGcf_geWk8OJ9oUgUWN4CAkGBr_Yl90JLJmwxJG5Q3yTaIPcyHBXaJ6v_D5R1Pe_SLvW8q4rrVqdqZBRXYW_JWDg6-AZVLBzeE7tAhyM6b1F10KqIuNYekVWa59ayRArShMqA_6DMyCt2yE0IfDwnrmLnEf-grGLvKdMwv7isf3oSOs7RHcLyq2LExqK0czih7MurX02e0MC10tmuk4YF3vIYI2gKetxsBGuGxEqjlNIA56wj3jZUSGKDDRv11F1lVzw6dgIBfbUTMWG_wX6N0eOAfDWqGyA1AAcPA0htZ0kXoDh48nv3A4puP5QcGbAn4Fak9s_Lya4HgxEEBvCctwNHXCks--IRKrHxm8uKsTG5_fEinQTm0M60SVh-BV5DaJLgw_UJbJeC2QarqhmzwkLHTCeKisSnD_aQtkxWHyEw8kJ1SjaHCwrmf0mx0BMCscJmUe-0bFdANaNVF7rD39UiiHqwq5S3RNgpfg9ZRqtRPgBM2jWCI6byN-13KCxy0SgKH4m4mmBr55bNfss=w742-h927-no?authuser=0">
@@ -28,4 +49,4 @@
     <mat-grid-tile colspan="1" rowspan="45">
         <iframe src="https://open.spotify.com/embed/playlist/4xgtilerVRShbhqpKY7Hor?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
     </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->

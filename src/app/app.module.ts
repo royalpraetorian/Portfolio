@@ -25,7 +25,8 @@ import { WritingpageComponent } from './writingpage/writingpage.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { BooksTabComponent } from './writingpage/books-tab/books-tab.component';
 import { PoetryTabComponent } from './writingpage/poetry-tab/poetry-tab.component';
-import { GamesTabComponent } from './writingpage/games-tab/games-tab.component'; 
+import { GamesTabComponent } from './writingpage/games-tab/games-tab.component';
+import { CodepageComponent } from './codepage/codepage.component'; 
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GamesTabComponent } from './writingpage/games-tab/games-tab.component';
     WritingpageComponent,
     BooksTabComponent,
     PoetryTabComponent,
-    GamesTabComponent
+    GamesTabComponent,
+    CodepageComponent
   ],
   imports: [
     BrowserModule,
