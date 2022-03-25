@@ -1,0 +1,55 @@
+<form id="requestForm" method="post" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="container">
+        <mat-form-field appearance="fill">
+            <mat-label>Song Request</mat-label>
+            <input #autoCompleteField 
+            name="autoCompleteField" 
+            id="autoCompleteField" 
+            required 
+            formControlName="songName" 
+            for="songName" 
+            type="text" 
+            placeholder="Anyway, Here's Wonderwall -" 
+            aria-label="Song" 
+            (keyup)="lookupAutocomplete(autoCompleteField.value)"
+            matInput 
+            [matAutocomplete]="auto">
+            <mat-autocomplete id="autocompleteComponent" autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title" class="autocompleteOption">
+                    <span class="trackInfoGrid" (click)="entrySelect(option)">
+                        <img class="autocompleteEntryIcon autocompleteEntryPart" src={{option.img}}/>
+                        <div class="autocompleteEntryTitle autocompleteEntryPart">{{option.title}}</div>
+                        <div class="autocompleteEntryArtists autocompleteEntryPart">{{artistsString(option.artists)}}</div>
+                    </span>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field id="name-entry" appearance="fill">
+            <mat-label>Name (Optional)</mat-label>
+            <input type="text" placeholder="Your Name" matInput formControlName="requesterName" for="requesterName">
+        </mat-form-field>
+    </div>
+    <button id="submitButton" type="submit" mat-raised-button color="warn">Submit Request</button>
+</form>
+<div id="leaderboard">
+    <div id="header">
+        Songs I've Been Asked To Learn
+    </div>
+    <div id="entries">
+        <div class="leaderboard-entry" *ngFor="let song of songs">
+            <div class="song-name">
+            {{song}}: {{leaderboard.get(song)?.tally}} 
+            <button [disabled]="leaderboard.get(song)?.voted" mat-raised-button color="warn">Vote</button>
+            </div>
+            <div class="container scroller">
+                <ng-marquee>
+                    <mark *ngFor="let voter of leaderboard.get(song)?.votes">{{voter}}</mark>
+                </ng-marquee>
+                <!-- <div class="voter-name" *ngFor="let voter of leaderboard.get(song)">
+                    {{voter}},
+                </div> -->
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>

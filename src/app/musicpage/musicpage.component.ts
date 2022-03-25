@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { YoutubeService } from '../youtube.service';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SongRequestWidgetComponent } from './song-request-widget/song-request-widget.component';
 
 @Component({
   selector: 'app-musicpage',

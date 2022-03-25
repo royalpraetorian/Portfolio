@@ -26,7 +26,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { BooksTabComponent } from './writingpage/books-tab/books-tab.component';
 import { PoetryTabComponent } from './writingpage/poetry-tab/poetry-tab.component';
 import { GamesTabComponent } from './writingpage/games-tab/games-tab.component';
-import { CodepageComponent } from './codepage/codepage.component'; 
+import { CodepageComponent } from './codepage/codepage.component';
+import { SongRequestWidgetComponent } from './musicpage/song-request-widget/song-request-widget.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { NgMarqueeModule } from 'ng-marquee-improved';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,8 @@ import { CodepageComponent } from './codepage/codepage.component';
     BooksTabComponent,
     PoetryTabComponent,
     GamesTabComponent,
-    CodepageComponent
+    CodepageComponent,
+    SongRequestWidgetComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,10 @@ import { CodepageComponent } from './codepage/codepage.component';
     HttpClientModule,
     MatTabsModule,
     RecaptchaModule,
+    NgMarqueeModule,
+    MatAutocompleteModule,
     MatFormFieldModule,
+    ScrollingModule,
     MatInputModule,
     FormsModule,
     MatCardModule,

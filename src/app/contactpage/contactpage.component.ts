@@ -55,8 +55,10 @@ export class ContactpageComponent implements OnInit {
       formData.append("message", this.formGroup.get("Message")?.value);
       this.isLoading = true;
       this.submitted = false;
-      this.http.post("https://script.google.com/macros/s/AKfycbyUQVEmBhM5rdLso1a2iA7Xft1ZM5CHDjSaR1qwffo6PJvcE4py-1Ff-5zimIFB3l35EA/exec", formData).subscribe(
+      this.http.post<Object>("http://localhost:3000/contact", formData).subscribe(
         (response: any) => {
+          console.log(response);
+          console.log(response.result);
           if(response.result == "success") {
             this.responseMessage = "Lovely to hear from you, friend.";
           }
@@ -68,6 +70,7 @@ export class ContactpageComponent implements OnInit {
           this.isLoading = false;
         },
         (error: any) => {
+          console.error(error);
           this.responseMessage = "There was an error, reload the page (F5) and try again.";
           this.formGroup.enable;
           this.submitted = true;
