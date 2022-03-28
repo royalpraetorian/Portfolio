@@ -1,6 +1,10 @@
+<mat-form-field id="name-entry" appearance="fill">
+    <mat-label>Name (Optional)</mat-label>
+    <input ngModel #nameEntry id="nameEntry" type="text" placeholder="Your Name" matInput formControlName="requesterName" for="requesterName">
+</mat-form-field>
 <form id="requestForm" method="post" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="container">
-        <mat-form-field appearance="fill">
+        <mat-form-field id="autocompleteBox" appearance="fill" (click)="fieldCLicked(autoCompleteField)">
             <mat-label>Song Request</mat-label>
             <input #autoCompleteField 
             name="autoCompleteField" 
@@ -24,10 +28,6 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <mat-form-field id="name-entry" appearance="fill">
-            <mat-label>Name (Optional)</mat-label>
-            <input type="text" placeholder="Your Name" matInput formControlName="requesterName" for="requesterName">
-        </mat-form-field>
     </div>
     <button id="submitButton" type="submit" mat-raised-button color="warn">Submit Request</button>
 </form>
@@ -36,20 +36,28 @@
         Songs I've Been Asked To Learn
     </div>
     <div id="entries">
-        <div class="leaderboard-entry" *ngFor="let song of songs">
-            <div class="song-name">
-            {{song}}: {{leaderboard.get(song)?.tally}} 
-            <button [disabled]="leaderboard.get(song)?.voted" mat-raised-button color="warn">Vote</button>
+        <div class="leaderboard-entry" *ngFor="let song of leaderboard">
+            <img id="artwork" src="{{song.artwork}}">
+            <div id="song-name">
+            {{song.title}}
+            </div>
+            <div id="votingButtonsDiv" *ngIf="song.voted; then UnVote else Vote"></div>
+            <ng-template id="votingButtons" #Vote><button class="vote-button" mat-raised-button color="primary" (click)="vote(song)">Vote</button></ng-template>
+            <ng-template id="votingButtons" #UnVote><button class="vote-button" mat-raised-button color="warn" (click)="unvote(song)">Voted</button></ng-template>
+            <div id="song-artist">
+                By: <div id="artistsString">{{artistsString(song.artists)}}</div>
             </div>
             <div class="container scroller">
-                <ng-marquee>
-                    <mark *ngFor="let voter of leaderboard.get(song)?.votes">{{voter}}</mark>
+                {{song.votes.length}} {{voteText(song)}}    
+                <!-- <ng-marquee>
+                    <mark>{{artistsString(song.votes)}}. </mark>
+                    <mark *ngFor="let voter of song.votes">{{voter}}, </mark>
                 </ng-marquee>
-                <!-- <div class="voter-name" *ngFor="let voter of leaderboard.get(song)">
+                <div class="voter-name" *ngFor="let voter of leaderboard.get(song)">
                     {{voter}},
                 </div> -->
             </div>
-            <hr>
+            <!-- <hr> -->
         </div>
     </div>
 </div>

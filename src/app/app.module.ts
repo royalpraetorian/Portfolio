@@ -31,6 +31,7 @@ import { SongRequestWidgetComponent } from './musicpage/song-request-widget/song
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { NgMarqueeModule } from 'ng-marquee-improved';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgxMarqueeComponent, NgxMarqueeModule } from 'ngx-marquee';
 
 @NgModule({
   declarations: [

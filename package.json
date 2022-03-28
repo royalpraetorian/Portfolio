@@ -28,6 +28,7 @@
     "ng-gapi": "0.0.94",
     "ng-marquee-improved": "^1.0.1",
     "ng-recaptcha": "^9.0.0",
+    "ngx-marquee": "^13.2.1",
     "ngx-spinner": "^13.0.0",
     "nodemailer": "^6.7.2",
     "rxjs": "~7.4.0",

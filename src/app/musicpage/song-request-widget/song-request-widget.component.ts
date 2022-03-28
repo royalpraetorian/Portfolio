@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgModule, NgZone, OnInit, ViewChild } from '@angular/core';
 import { SongrequestService } from 'src/app/songrequest.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -14,31 +14,34 @@ import { ThisReceiver } from '@angular/compiler';
 import { MAT_OPTION_PARENT_COMPONENT } from '@angular/material/core';
 import { of } from 'rxjs';
 
+
 @Component({
   selector: 'app-song-request-widget',
   templateUrl: './song-request-widget.component.html',
   styleUrls: ['./song-request-widget.component.sass']
 })
+
 export class SongRequestWidgetComponent implements OnInit {
   control = new FormControl();
   formBuilder = new FormBuilder();
   formGroup!: FormGroup;
   options: AutocompleteEntry[] = [];
   filteredOptions?: Observable<AutocompleteEntry[]>;
-  leaderboard: Map<string, Recommendation> = new Map<string, Recommendation>();
+  leaderboard: Recommendation[] = [];
   songs?: string[];
   clientIP?: string;
   autocompleteInputTimeout = 500;
   autocompleteInputTimer: any;
   selectedSong?: AutocompleteEntry;
+  songSelected: boolean = false;
 
   constructor(private ngZone: NgZone, requestService: SongrequestService, private ip: IpService, private http: HttpClient) {
     this.formGroup = this.formBuilder.group({
-      songName: new FormControl('', [Validators.required, autocompleteStringValidator(this.options.map(option => option.title))]),
+      songName: new FormControl(''),
       requesterName: new FormControl('')
     })
     this.getIP();
-    this.songs = Array.from(this.leaderboard.keys());
+    this.getRequests();
   }
 
   ngOnInit() {
@@ -47,13 +50,116 @@ export class SongRequestWidgetComponent implements OnInit {
     this.getIP();
   }
 
-  onSubmit() {
-
+  async onSubmit() {
+    if(this.songSelected)
+    {
+      this.http.post("http://localhost:3000/songrequest/request", {
+      "id": this.selectedSong?.id,
+      "votes": [
+        {"ip": this.clientIP,
+      "name": ""+this.formGroup.controls['requesterName'].value}
+      ],
+      "title": this.selectedSong?.title,
+      "artists": this.selectedSong?.artists,
+      "artwork": this.selectedSong?.img
+    }).subscribe(res => {
+      this.getRequests();
+    });
+    }
+    else if(this.selectedSong==undefined)
+    {
+      console.log("No song selected");
+    }
+    else
+    {
+      console.log("Please select a valid song");
+    }
   }
 
   entrySelect(selection: AutocompleteEntry){
+    this.songSelected = true;
     this.selectedSong = selection;
     console.log(this.selectedSong);
+    console.log("Options: " + this.options.map(option => {return option.title}).join(', '));
+    console.log("Song Selected: " + this.songSelected);
+    this.formGroup.controls['songName'].updateValueAndValidity({onlySelf: true, emitEvent: true});
+  }
+
+  async getRequests(){
+    this.leaderboard = await firstValueFrom(this.http.get<Recommendation[]>("http://localhost:3000/songrequest/getAllRequests"));
+    console.log(this.leaderboard);
+  }
+
+  fieldCLicked(inputField: HTMLInputElement)
+  {
+    console.log("Field clicked");
+    this.selectedSong = undefined;
+    this.songSelected = false;
+    inputField.value = "";
+  }
+
+  unvote(song: Recommendation)
+  {
+    this.http.post("http://localhost:3000/songrequest/unvote", song).subscribe(res => {
+      this.getRequests();
+    });
+  }
+
+  async vote(song: Recommendation)
+  {
+    this.http.post("http://localhost:3000/songrequest/request", {
+      "id": song?.id,
+      "votes": [
+        {"ip": this.clientIP,
+      "name": ""+this.formGroup.controls['requesterName'].value}
+      ],
+      "title": song?.title,
+      "artists": song?.artists,
+      "artwork": song?.artwork
+    }).subscribe(res => {
+      console.log(res);
+      this.getRequests();
+    });
+
+    // var response = await firstValueFrom(this.http.post("http://localhost:3000/songrequest/request", {
+    //   "id": song?.id,
+    //   "votes": [
+    //     {"ip": this.clientIP,
+    //   "name": ""+this.formGroup.controls['requesterName'].value}
+    //   ],
+    //   "title": song?.title,
+    //   "artists": song?.artists,
+    //   "artwork": song?.artwork
+    // }));
+    // console.log(response);
+  }
+
+  voteText(song: Recommendation)
+  {
+    if(song.votes.length==1)
+    {
+      return "Vote.";
+      // if(song.votes[0]=="")
+      // {
+      //   return "Vote.  ";
+      // }
+      // else
+      // {
+      //   return "Vote, from:  "
+      // }
+    }
+    else
+    {
+      return "Votes.";
+      // if(song.votes.some(vote => { return vote!=""}))
+      // {
+      //   return "Votes, including:  ";
+      // }
+      // else
+      // {
+      //   return "Votes.  ";
+      // }
+    }
   }
 
   artistsString(artists: string[]) {
@@ -61,6 +167,8 @@ export class SongRequestWidgetComponent implements OnInit {
   }
 
   lookupAutocomplete(input: string) {
+    this.selectedSong = undefined;
+    this.songSelected = false;
     console.log('Timer Started');
     clearTimeout(this.autocompleteInputTimer);
     if (input != "") {
@@ -74,7 +182,6 @@ export class SongRequestWidgetComponent implements OnInit {
     }
 
   }
-
 
   private getIP() {
     this.ip.getClientIPAddress().subscribe((res: any) => {
@@ -94,19 +201,16 @@ export class SongRequestWidgetComponent implements OnInit {
   console.log("Filtered List: " + retVal);
   return retVal;
   }
+
 }
 
-function autocompleteStringValidator(validOptions: Array<string>): ValidatorFn {
+function autocompleteStringValidator(songSelected: boolean): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    if (validOptions.indexOf(control.value) !== -1) {
+    if (songSelected) {
       return null  /* valid option selected */
     }
     return { 'invalidAutocompleteString': { value: control.value } }
   }
-}
-
-function getRequests() {
-
 }
 
 class AutocompleteEntry {
@@ -128,16 +232,23 @@ class AutocompleteEntry {
 }
 
 class Recommendation {
-  public title?: string;
-  public id?: string;
-  public votes?: string[];
-  public voted?: boolean;
-  public tally?: number;
+  public id: string;
+  public artists: string[];
+  public artwork: string;
+  public title: string;
+  public voted: boolean;
+  public votes: string[];
+  public tally: number;
 
-  constructor(name: string, voterNames: string[], tally: number) {
-    this.title = name;
-    this.tally = tally;
-    this.votes = voterNames;
+  constructor(id: string, artists: string[], artwork: string, title: string, voted: boolean, votes: string[])
+  {
+    this.id = id;
+    this.artists = artists;
+    this.artwork = artwork;
+    this.title = title;
+    this. voted = voted;
+    this.votes = votes;
+    this.tally = votes.length;
   }
 }
 
