@@ -12,36 +12,41 @@ p
     margin-left: 0%
     font-size: 20px
     margin-bottom: 3%
+    padding-top: 3%
 
 #emailForm
     background-color: #C7483A
-    position: fixed
-    display: inline-block
+    position: relative
+    display: block
     width: 30%
-    height: 48%
+    min-width: 270px
+    // max-height: 60%
     left: 50%
-    top: 50%
-    margin-left: -15%
-    margin-top: -10%
+    top: 40%
+    transform: translate(-50%, -50%)
+    
 
 mat-form-field
-    left: 5%
-    margin-top: 4%
-    margin-bottom: -5%
-    width: 400px
+    left: 50%
+    display: block
+    padding-top: 15px
+    transform: translate(-50%)
+    min-width: 260px
+    width: 98%
     resize: none
 
 #messageField
-    width: 500px
+    min-width: 260px
+    padding-bottom: 15px
 
 #messageFieldInput
     height: 100px
 
 #submitButton
-    position: fixed
-    top: 73%
+    position: relative
+    // top: 73%
     left: 50%
-    margin-left: -5.4%
+    transform: translate(-50%)
     width: 200px
 
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex

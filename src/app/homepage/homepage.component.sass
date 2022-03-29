@@ -1,15 +1,33 @@
+#centering-grid
+    max-width: 100%
+    max-height: 100%
+
 .intro-card
     max-width: 25%
-    left: 35%
-    top: 5%
+    min-width: 250px
+    top: 20px
+    left: 50%
+    transform: translate(-50%)
+    // left: 35%
+    // top: 5%
 
 .intro-actions
     position: relative
-    left: -38%
+    left: 50%
+    transform: translate(-50%)
 
 .intro-header
+    position: relative
     text-align: center
-    padding-left: 15%
+    left: 50%
+    transform: translate(-50%)
+
+::ng-deep .mat-card-header-text
+    text-align: center
+    position: relative
+    margin: 0px !important
+    left: 50%
+    transform: translate(-50%)
 
 .intro-header-image
     // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg')

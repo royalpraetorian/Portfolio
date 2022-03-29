@@ -51,9 +51,61 @@ export class SongRequestWidgetComponent implements OnInit {
     this.getIP();
   }
 
+  visualAddVoteBySong(song?: AutocompleteEntry)
+  {
+    if(song!=undefined)
+    {
+      var rec = new Recommendation(song.id, song.artists, song.img, song.title, true, [""]);
+      this.visualAddVote(rec);
+    }
+  }
+
+  visualAddVote(rec: Recommendation)
+  {
+    var entry = this.leaderboard.find(entry => {return entry.id == rec.id});
+
+    if(entry!=undefined) 
+    {
+      entry.votes.push("");
+      entry.voted=true;
+    }
+    else
+    {
+      rec.voted=true;
+      this.leaderboard.push(rec);
+    }
+  }
+
+  visualRemoveVoteBySong(song: AutocompleteEntry)
+  {
+    if(song!=undefined)
+    {
+      var rec = new Recommendation(song.id, song.artists, song.img, song.title, false, [""]);
+      this.visualRemoveVote(rec);
+    }
+  }
+  visualRemoveVote(rec: Recommendation)
+  {
+    var entry = this.leaderboard.find(entry => {return entry.id == rec.id});
+    if(entry!=undefined)
+    {
+      if(entry.votes.length==1)
+      {
+        var index = this.leaderboard.indexOf(entry);
+        this.leaderboard.splice(index, 1);
+      }
+      else
+      {
+        entry.votes.pop();
+        entry.voted=false;
+      }
+    }
+  }
+
   async onSubmit() {
     if(this.songSelected)
     {
+      this.visualAddVoteBySong(this.selectedSong);
       this.http.post(this.apiServer+"/songrequest/request", {
       "id": this.selectedSong?.id,
       "votes": [
@@ -63,9 +115,7 @@ export class SongRequestWidgetComponent implements OnInit {
       "title": this.selectedSong?.title,
       "artists": this.selectedSong?.artists,
       "artwork": this.selectedSong?.img
-    }).subscribe(res => {
-      this.getRequests();
-    });
+    }).subscribe(res => {   });
     }
     else if(this.selectedSong==undefined)
     {
@@ -101,13 +151,14 @@ export class SongRequestWidgetComponent implements OnInit {
 
   unvote(song: Recommendation)
   {
+    this.visualRemoveVote(song);
     this.http.post(this.apiServer+"/songrequest/unvote", song).subscribe(res => {
-      this.getRequests();
     });
   }
 
   async vote(song: Recommendation)
   {
+    this.visualAddVote(song);
     this.http.post(this.apiServer+"/songrequest/request", {
       "id": song?.id,
       "votes": [
@@ -119,20 +170,7 @@ export class SongRequestWidgetComponent implements OnInit {
       "artwork": song?.artwork
     }).subscribe(res => {
       console.log(res);
-      this.getRequests();
     });
-
-    // var response = await firstValueFrom(this.http.post("http://localhost:3000/songrequest/request", {
-    //   "id": song?.id,
-    //   "votes": [
-    //     {"ip": this.clientIP,
-    //   "name": ""+this.formGroup.controls['requesterName'].value}
-    //   ],
-    //   "title": song?.title,
-    //   "artists": song?.artists,
-    //   "artwork": song?.artwork
-    // }));
-    // console.log(response);
   }
 
   voteText(song: Recommendation)

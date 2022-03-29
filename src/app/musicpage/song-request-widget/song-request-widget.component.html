@@ -42,8 +42,8 @@
             {{song.title}}
             </div>
             <div id="votingButtonsDiv" *ngIf="song.voted; then UnVote else Vote"></div>
-            <ng-template id="votingButtons" #Vote><button class="vote-button" mat-raised-button color="primary" (click)="vote(song)">Vote</button></ng-template>
-            <ng-template id="votingButtons" #UnVote><button class="vote-button" mat-raised-button color="warn" (click)="unvote(song)">Voted</button></ng-template>
+            <ng-template id="votingButtons" #Vote><button class="vote-button" mat-raised-button color="primary" data-hover="Vote ✔" (click)="vote(song)"><div>Vote ?</div></button></ng-template>
+            <ng-template id="votingButtons" #UnVote><button class="vote-button" mat-raised-button color="warn" data-hover="Unvote X" (click)="unvote(song)"><div>Voted ✔</div></button></ng-template>
             <div id="song-artist">
                 By: <div id="artistsString">{{artistsString(song.artists)}}</div>
             </div>
