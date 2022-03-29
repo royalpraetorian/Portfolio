@@ -1,19 +1,19 @@
 <mat-grid-list [cols]="columns" rowHeight="1:0.01" gutterSize="1%" (window:resize)="onResize($event)">
   <mat-grid-tile colspan="1" rowspan="25">
     <app-displaybox>
-      <img backdrop class="img-backdrop"  src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"/>
+      <img backdrop class="img-backdrop"  src="../../assets/books picture.jpeg"/>
       <button overlay mat-raised-button color="warn" (click)="routeTo('writing/books')">Books</button>
     </app-displaybox>
   </mat-grid-tile>  
   <mat-grid-tile colspan="1" rowspan="25">
     <app-displaybox>
-      <img backdrop class="img-backdrop"  src="https://images.pexels.com/photos/261763/pexels-photo-261763.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+      <img backdrop class="img-backdrop"  src="../../assets/poetry picture.jpeg"/>
       <button overlay mat-raised-button color="warn" (click)="routeTo('writing/poetry')">Poetry</button>
     </app-displaybox>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="25">
       <app-displaybox>
-        <img class="img-backdrop" backdrop src="https://www.reviewgeek.com/p/uploads/2021/02/502f42ff.png?width=1200"/>
+        <img class="img-backdrop" backdrop src="../../assets/games picture.jpeg"/>
         <button overlay mat-raised-button color="warn" (click)="routeTo('writing/games')">Games</button>
       </app-displaybox>
     </mat-grid-tile>
