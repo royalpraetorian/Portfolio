@@ -32,7 +32,7 @@ export class MusicpageComponent implements OnInit {
       document.body.appendChild(tag);
       this.apiLoaded=true;
     }
-    let response = await this.youtubeService.getVideosFromPlaylist('PLQdvZmDLepiAl4fbNqwFRKVfcdlSl9oq4', 50);
+    let response = await this.youtubeService.getVideosFromPlaylist();
     this.videos = response.data.items;
     console.log(this.videos);
   }

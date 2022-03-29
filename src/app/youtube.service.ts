@@ -13,15 +13,7 @@ export class YoutubeService {
 
   constructor(public http: HttpClient) { }
 
-  public getVideosForChannel(channel: string, maxResults: number): Observable<Object> {
-    let url = 'https://www.googleapis.com/youtube/v3/search?key=' + this.apiKey + '&channelId=' + channel + '&order=date&part=snippet &type=video,id&maxResults=' + maxResults
-    return this.http.get(url)
-      .pipe(map((res) => {
-        return res;
-      }))
-  }
-
-  public async getVideosFromPlaylist(playlist: string, maxResults: number) {
-    return await axios('https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults='+ maxResults +'&playlistId='+ playlist + '&key='+this.apiKey);
+  public async getVideosFromPlaylist() {
+    return await axios("http://34.125.165.183:3000/youtube/getPlaylistVideos");
   }
 }

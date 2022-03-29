@@ -34,6 +34,7 @@ export class SongRequestWidgetComponent implements OnInit {
   autocompleteInputTimer: any;
   selectedSong?: AutocompleteEntry;
   songSelected: boolean = false;
+  apiServer = "http://34.125.165.183:3000";
 
   constructor(private ngZone: NgZone, requestService: SongrequestService, private ip: IpService, private http: HttpClient) {
     this.formGroup = this.formBuilder.group({
@@ -53,7 +54,7 @@ export class SongRequestWidgetComponent implements OnInit {
   async onSubmit() {
     if(this.songSelected)
     {
-      this.http.post("http://localhost:3000/songrequest/request", {
+      this.http.post(this.apiServer+"/songrequest/request", {
       "id": this.selectedSong?.id,
       "votes": [
         {"ip": this.clientIP,
@@ -86,7 +87,7 @@ export class SongRequestWidgetComponent implements OnInit {
   }
 
   async getRequests(){
-    this.leaderboard = await firstValueFrom(this.http.get<Recommendation[]>("http://localhost:3000/songrequest/getAllRequests"));
+    this.leaderboard = await firstValueFrom(this.http.get<Recommendation[]>(this.apiServer+"/songrequest/getAllRequests"));
     console.log(this.leaderboard);
   }
 
@@ -100,14 +101,14 @@ export class SongRequestWidgetComponent implements OnInit {
 
   unvote(song: Recommendation)
   {
-    this.http.post("http://localhost:3000/songrequest/unvote", song).subscribe(res => {
+    this.http.post(this.apiServer+"/songrequest/unvote", song).subscribe(res => {
       this.getRequests();
     });
   }
 
   async vote(song: Recommendation)
   {
-    this.http.post("http://localhost:3000/songrequest/request", {
+    this.http.post(this.apiServer+"/songrequest/request", {
       "id": song?.id,
       "votes": [
         {"ip": this.clientIP,
@@ -174,7 +175,7 @@ export class SongRequestWidgetComponent implements OnInit {
     if (input != "") {
       this.ngZone.run(() => {this.autocompleteInputTimer = setTimeout(async () => {
         console.log('Lookup started');
-        this.options = await firstValueFrom(this.http.get<AutocompleteEntry[]>(`http://localhost:3000/songrequest/autofill?title=${input}`));
+        this.options = await firstValueFrom(this.http.get<AutocompleteEntry[]>(`${this.apiServer}/songrequest/autofill?title=${input}`));
         console.log(this.options);
         this.filteredOptions = of(this.options);
         console.log(this.filteredOptions);
