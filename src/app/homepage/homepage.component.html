@@ -12,10 +12,10 @@
     </p>
     </mat-card-content>
     <mat-card-actions class="intro-actions">
-        <button (click)="openTab('https://www.linkedin.com/in/lonelevelsands/')" overlay mat-raised-button color="warn">LinkedIn</button>
-        <button (click)="openTab('https://github.com/royalpraetorian?tab=repositories')" overlay mat-raised-button color="warn">GitHub</button>
-        <button (click)="openTab('https://www.twitch.tv/yiwmsh')" overlay mat-raised-button color="warn">Twitch</button>
-        <button (click)="openTab('https://www.youtube.com/channel/UCERImkW_pOgn_ocj7HApmIg')" overlay mat-raised-button color="warn">Youtube</button>
+        <button (click)="openTab('https://www.linkedin.com/in/lonelevelsands/')" mat-raised-button color="warn" class="action-button" id="linkedInButton">LinkedIn</button>
+        <button (click)="openTab('https://github.com/royalpraetorian?tab=repositories')" mat-raised-button color="warn" class="action-button" id="gitHubButton">GitHub</button>
+        <button (click)="openTab('https://www.twitch.tv/yiwmsh')" id="twitchButton" mat-raised-button color="warn" class="action-button" >Twitch</button>
+        <button (click)="openTab('https://www.youtube.com/channel/UCERImkW_pOgn_ocj7HApmIg')" mat-raised-button color="warn" class="action-button" id="youtubeButton">Youtube</button>
     </mat-card-actions>
   </mat-card>
   
@@ -32,19 +32,19 @@
     <mat-grid-tile colspan="1" rowspan="45">\
         <app-displaybox>
             <img backdrop src="https://lh3.googleusercontent.com/rbQUcrNbEbrcj2khJ-EF78NGBC3I9avr13Yyvvl1Bp3vfhGozYmwJDB1Or7YqCvNJQHFpGDjdr3AZl0HiYMPisjASYoTkNnxxHITdw-il64ebvXbj3N2-ff4O1JK-0QeetdB1tVn7sGqNB2NjQq8SwKjri9nM8dnhUrMFXFu4y-BTI9IH5oLSNvO-vgVtpdsR2KpXk4b6aY9alBFxF_JtTNbKo_J2X4Hbx3d28BzoA6C_vjuoIJWfYhnbT_imrQpSG4ApviZCy9iDmlavQLeOG4PpZVBGqi1v3PE1xkOicqDlBPz8ect-gg2iGtCvLK9-hur6LxavtmHyELlMLyH5sliVDOH9ZPkM1blj8nXlekw768w__hClzL7dMxmXjvafXpZlq3Xka6oEAlwK8CTGzkziP9c1KgNbE9Y7XE8F2MBtXKM6xZ199JYb1mmbsIOZqMW_8ld0LiiUeGEuUoyvijltrCKZdvK3l9gr29rNel1E3cm-tvSXb6T6cPl7mdKwXxpwBFmhkdmxPK4XtRps8W1Xcd0AOAhzRFtB7f8c1AlooZJvCrmnrMZHPeZB4K1aTnikVCqwXyUI5gCMlc0WLjBITEJ45O4Gxt0MHgd2mGAT8L5eMyPAj4CMM7Knyy1Qlb7DISaARAdf-p7pSxo0djYc2gbddgzr_H2rOaXK-XdrgqTeguKrKndQGROSz5ccGY3CJ_GmhLj_kXXgGPaCk8=w945-h927-no?authuser=0">
-            <button (click)="openTab('https://www.linkedin.com/in/lonelevelsands/')" overlay mat-raised-button color="warn">My LinkedIn</button>
+            <button (click)="openTab('https://www.linkedin.com/in/lonelevelsands/')" >My LinkedIn</button>
         </app-displaybox>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="55">
         <app-displaybox class="insta" background>
             <img backdrop src="https://lh3.googleusercontent.com/dOzkrl15CD0s7niUxqfyR3Ptk73Mpqnj5aEKnK7OM33p1o0Yxz7IuydQp1Oibv-YDtZQVrnBKfu4l79fdqUQ3W6E-2HL_fgOvsG4QoxdQsQAujbLtWe-W8j__pezmat8_RC0cNlr7p4eGpNE-F1-x3jIPvp3dd6k3EpWhTyZOvrg9zLJ_xAI0IK6ksVNJ6GieTG_Qf7aYqG4JPwLCD7Gq1-WcEFTAOrkxMbnA4vI16TCc8wKUjQpUsqzYV1bkdnoXP2N4S0YasRJ0AZX1fHpgOqAXMqgahtX6itTUpVWmV36s14XVqx65LW9oTVKreB0iF5fAEEgyKDSWcZKr6MWaeumXGjiHPNr7lkXu7pg2_YvlWFQTkL2FckwWR5RM--I0c6oZjOwUkkj4gen9iokoSqKVKTALB5Mrphn4dlKIuXd46Kqtde9nglhbIWqTsixIfQdIEtUUfoQR204nUMxaQinz57n77aLJu88-dAwFHRivumna3kC6aOe-oD6hrjgQ3JGy5LZhSDyk5zhAjoprgDA9Wl5JBy2nC-axq75JS1kRMPQIlT05ig4VN1WKoFlUCDggT-9pG_9b-gmp1-oWTb5IQUok5n7Mx9083hJNFHvR6k46vm86_IPquJMVkOaj7HGE7Q2DP3tLhaqVTQGQwdT3R8RjJIs16k27fUJ7BMpxeDaYJtgr2d53AWZDxWt17e3mlYiLiQ5tjRhc1AQbvQ=w742-h927-no?authuser=0">
-            <button (click)="openTab('https://www.instagram.com/yiwmsh/?hl=en')" overlay mat-raised-button color="warn">My Instagram</button>
+            <button (click)="openTab('https://www.instagram.com/yiwmsh/?hl=en')" >My Instagram</button>
         </app-displaybox>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="25">
         <app-displaybox>
             <img backdrop src="https://lh3.googleusercontent.com/rFUvuVurZpBycHlF3AmYIfGJqzwAir9sCOoZmduGgIi04aw7zCPskd07bnPNaO2Q6D20MxDbCJ0_Ypup_Fn9pn1WO6WwGYoq0Cug3mita091GWYEg2XI_PuE6M2j9e5b5aUYL7KjG4ORL1lS2KxFMECgx71gGBJUQWpKSEzYfJ26D0ctZUiemk-VG6QuCINsJprAhg8ytMR18BUC6jYHRjAyps8hxAVuYzKPKtJr4bwuLrj8ZQiWyP311Pc5AxMR1csj2AtTLo07AZRUgb0KGpEEAx4X6wO2n6PPI4AJwwtbDmLcTirnD2LI3rj_t5At4LlYLtJmQp5_bdY4b3jdZJ6Kgfu0UixTLAJyBzfNgyDAdkmMZ7yNZmhc6blXt71YgO2LiWOoeJfHO3mmx79ffVRXFMfhKNvkd22HMBXiM58jEDcE_YdmzsfnPWtEb3ZFH8sBY3oyCTlMJiFmegf5ECDWF0erc-xrVC1KpV_UoH6UfclInhXfXhsJdRAv3L6UGZUq2Rt2clFqRYEiowevXVGSj9RT-Qov3H2G3BOxAKUPvhGApfPG7phbm-QKMyqILlRP41eT1oQYj0q0Yk3Dr5NmK_ioSTBKfNAnN9S_ZFt7Ctq-lBsPeQs3BLBIX385AJOPkcP_isH6v1jPNe70GYlWZEZf3_agKTJZbV8hlrzANJXLH8NCcgDXdZ70brmzW8fDZyPiyQI5bhdsf67HAOI=w477-h250-no?authuser=0">
-            <button (click)="openTab('https://www.youtube.com/channel/UCERImkW_pOgn_ocj7HApmIg')" overlay mat-raised-button color="warn">My Youtube</button>
+            <button (click)="openTab('https://www.youtube.com/channel/UCERImkW_pOgn_ocj7HApmIg')" >My Youtube</button>
         </app-displaybox>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="45">
