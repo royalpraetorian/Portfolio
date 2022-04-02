@@ -18,8 +18,8 @@
             cdkAutosizeMinRows="1"
             cdkAutosizeMaxRows="6" required></textarea>
     </mat-form-field>
-    <button [disabled]="isLoading" id="submitButton" type="submit" mat-raised-button color="warn">Send</button>
     <div [ngClass]="!submitted? 'hidden' : 'visible'" id="responseMessage">
         <span>{{responseMessage}}</span>
     </div>
+    <button [disabled]="isLoading" id="submitButton" type="submit" mat-raised-button color="warn">Send</button>
 </form>
