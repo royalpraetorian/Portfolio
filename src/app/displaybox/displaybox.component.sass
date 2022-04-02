@@ -1,22 +1,29 @@
 #container
     position: relative
     color: #000
-    width: 100%
+    width: auto
+    height: auto
+    box-sizing: border-box
 #backdrop
     display: block
     width: 100%
-    height: auto
+    height: 100%
 #overlay
     position: absolute
+    box-sizing: border-box
     top: 0
     bottom: 0
     left: 0
     right: 0
-    height: 100%
-    width: 100%
+    height: auto
+    width: auto
     opacity: 0
     transition: .5s ease
     // background-color: #008cba
+#frame
+    box-sizing: border-box
+    width: auto
+    height: auto
 
 #container:hover .overlay
     opacity: 1

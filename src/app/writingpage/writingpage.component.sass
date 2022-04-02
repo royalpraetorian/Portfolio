@@ -1,3 +1,49 @@
+#writingPageGrid
+    display: grid
+    @media screen and (min-width: 1524px)
+        grid-template-columns: 1fr 1fr 1fr
+        grid-template-rows: 1fr
+        grid-template-areas: "books poetry games"
+    @media screen and (max-width: 1523px)
+        grid-template-columns: 1fr 1fr 1fr 1fr
+        grid-template-rows: 1fr 1fr
+        grid-template-areas: ". books books ." "poetry poetry games games"
+        height: 580px
+    @media screen and (max-width: 1045px) and (min-width: 0px)
+        grid-template-columns: 1fr
+        grid-template-rows: 1fr 1fr 1fr
+        grid-template-areas: "books" "poetry" "games"
+        height: 450px
+        top: 2%
+    width: 100%
+    left: 50%
+    top: 20%
+    transform: translate(-50%)
+    position: absolute
+    justify-content: space-evenly
+
+#booksDisplayBox
+    grid-area: books
+
+#poetryDisplayBox
+    grid-area: poetry
+
+#gamesDisplayBox
+    grid-area: games
+
+#booksDisplayBox, #poetryDisplayBox, #gamesDisplayBox
+    height: 280px
+    overflow: hidden
+    position: absolute
+    justify-self: center
+    display: flex
+    justify-content: center
+    @media screen and (max-width: 1045px) and (min-width: 0px)
+        height: 145px
+
+app-displaybox > #container > #overlay
+    max-height: 286px
+    
 mat-grid-list
     top: 50%
     left: 50%
