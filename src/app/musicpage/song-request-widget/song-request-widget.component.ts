@@ -35,6 +35,7 @@ export class SongRequestWidgetComponent implements OnInit {
   selectedSong?: AutocompleteEntry;
   songSelected: boolean = false;
   apiServer = "http://34.125.165.183:3000";
+  // apiServer = "http://localhost:3000";
 
   constructor(private ngZone: NgZone, requestService: SongrequestService, private ip: IpService, private http: HttpClient) {
     this.formGroup = this.formBuilder.group({
@@ -259,14 +260,16 @@ class AutocompleteEntry {
   public album: string;
   public img: string;
   public id: string;
+  public learning: boolean;
 
-  constructor(id: string, title: string, artists: string[], album: string, img: string, popularity: number = 0) {
+  constructor(id: string, title: string, artists: string[], album: string, img: string, learning: boolean, popularity: number = 0) {
     this.title = title;
     this.id = id;
     this.artists = artists;
     this.album = album;
     this.popularity = popularity;
     this.img = img;
+    this.learning = learning;
   }
 }
 

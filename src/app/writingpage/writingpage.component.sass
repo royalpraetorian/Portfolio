@@ -1,16 +1,16 @@
 #writingPageGrid
     display: grid
-    @media screen and (min-width: 1524px)
+    @media (min-width: 1524px)
         grid-template-columns: 1fr 1fr 1fr
         grid-template-rows: 1fr
         grid-template-areas: "books poetry games"
-    @media screen and (max-width: 1523px)
+    @media (max-width: 1523px)
         grid-template-columns: 1fr 1fr 1fr 1fr
         grid-template-rows: 1fr 1fr
         grid-template-areas: ". books books ." "poetry poetry games games"
         height: 580px
         top: 10%
-    @media screen and (max-width: 1045px) and (min-width: 0px)
+    @media (max-width: 1045px) and (min-width: 0px)
         grid-template-columns: 1fr
         grid-template-rows: 1fr 1fr 1fr
         grid-template-areas: "books" "poetry" "games"
@@ -45,12 +45,6 @@
 app-displaybox > #container > #overlay
     max-height: 286px
     
-mat-grid-list
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    height: 200px
-
 button
     font-size: 20px
     position: absolute
