@@ -13,7 +13,7 @@ export class YoutubeService {
   constructor(public http: HttpClient) { }
 
   public async getVideosFromPlaylist() {
-    return await axios("http://54.151.0.85:3000/youtube/getPlaylistVideos");
+    return await axios("http://52.53.243.7:3000/youtube/getPlaylistVideos");
     // return await axios("http://localhost:3000/youtube/getPlaylistVideos");
   }
 }
