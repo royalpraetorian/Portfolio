@@ -19,13 +19,41 @@
             matInput 
             [matAutocomplete]="auto">
             <mat-autocomplete id="autocompleteComponent" autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title" class="autocompleteOption">
-                    <span class="trackInfoGrid" (click)="entrySelect(option)">
-                        <img class="autocompleteEntryIcon autocompleteEntryPart" src={{option.img}}/>
-                        <div class="autocompleteEntryTitle autocompleteEntryPart">{{option.title}}</div>
-                        <div class="autocompleteEntryArtists autocompleteEntryPart">{{artistsString(option.artists)}}</div>
-                    </span>
-                </mat-option>
+                <div *ngFor="let option of filteredOptions | async">
+                    <div *ngIf="option.learning; then learning else notLearning"></div>
+                    <ng-template #learning>
+                        <mat-option [value]="option.title" disabled>
+                            <div class="disabledOption">I'm already learning this song!</div>
+                            <span class="trackInfoGrid" (click)="entrySelect(option)">
+                                <img class="autocompleteEntryIcon autocompleteEntryPart" src={{option.img}}/>
+                                <div class="autocompleteEntryTitle autocompleteEntryPart">{{option.title}}</div>
+                                <div class="autocompleteEntryArtists autocompleteEntryPart">{{artistsString(option.artists)}}</div>
+                            </span>
+                        </mat-option>
+                    </ng-template>
+                    <ng-template #notLearning>
+                        <div *ngIf="alreadyVotedCheck(option); then voted else validOption"></div>
+                        <ng-template #voted>
+                            <mat-option [value]="option.title" disabled>
+                                <div class="disabledOption">You've already voted for this song.</div>
+                                <span class="trackInfoGrid" (click)="entrySelect(option)">
+                                    <img class="autocompleteEntryIcon autocompleteEntryPart" src={{option.img}}/>
+                                    <div class="autocompleteEntryTitle autocompleteEntryPart">{{option.title}}</div>
+                                    <div class="autocompleteEntryArtists autocompleteEntryPart">{{artistsString(option.artists)}}</div>
+                                </span>
+                            </mat-option>
+                        </ng-template>
+                        <ng-template #validOption>
+                            <mat-option [value]="option.title">
+                                <span class="trackInfoGrid" (click)="entrySelect(option)">
+                                    <img class="autocompleteEntryIcon autocompleteEntryPart" src={{option.img}}/>
+                                    <div class="autocompleteEntryTitle autocompleteEntryPart">{{option.title}}</div>
+                                    <div class="autocompleteEntryArtists autocompleteEntryPart">{{artistsString(option.artists)}}</div>
+                                </span>
+                            </mat-option>
+                        </ng-template>
+                    </ng-template>
+                </div>
             </mat-autocomplete>
         </mat-form-field>
     </div>

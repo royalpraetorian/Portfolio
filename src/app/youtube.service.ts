@@ -9,11 +9,11 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class YoutubeService {
-  apiKey : string = 'AIzaSyAjN06IOff0BvB1Vvc6ndjKKFnwQd-ZGdc';
 
   constructor(public http: HttpClient) { }
 
   public async getVideosFromPlaylist() {
     return await axios("http://34.125.165.183:3000/youtube/getPlaylistVideos");
+    // return await axios("http://localhost:3000/youtube/getPlaylistVideos");
   }
 }

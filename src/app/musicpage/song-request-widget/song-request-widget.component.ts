@@ -46,6 +46,12 @@ export class SongRequestWidgetComponent implements OnInit {
     this.getRequests();
   }
 
+  alreadyVotedCheck(song: AutocompleteEntry)
+  {
+    var leaderboardEntry = this.leaderboard.find(entry => entry.id == song.id);
+    return (leaderboardEntry!=undefined && leaderboardEntry?.voted)
+  }
+
   ngOnInit() {
     var sampleData = new SampleData();
     this.filteredOptions = of(sampleData.data);
@@ -129,12 +135,15 @@ export class SongRequestWidgetComponent implements OnInit {
   }
 
   entrySelect(selection: AutocompleteEntry){
-    this.songSelected = true;
-    this.selectedSong = selection;
-    console.log(this.selectedSong);
-    console.log("Options: " + this.options.map(option => {return option.title}).join(', '));
-    console.log("Song Selected: " + this.songSelected);
-    this.formGroup.controls['songName'].updateValueAndValidity({onlySelf: true, emitEvent: true});
+    if(selection.learning)
+    {
+      this.songSelected = true;
+      this.selectedSong = selection;
+      console.log(this.selectedSong);
+      console.log("Options: " + this.options.map(option => {return option.title}).join(', '));
+      console.log("Song Selected: " + this.songSelected);
+      this.formGroup.controls['songName'].updateValueAndValidity({onlySelf: true, emitEvent: true});
+    }
   }
 
   async getRequests(){
