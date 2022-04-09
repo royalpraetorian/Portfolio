@@ -34,7 +34,7 @@ export class SongRequestWidgetComponent implements OnInit {
   autocompleteInputTimer: any;
   selectedSong?: AutocompleteEntry;
   songSelected: boolean = false;
-  apiServer = "http://52.53.243.7:3000";
+  apiServer = "http://54.219.159.46:3000";
   // apiServer = "http://localhost:3000";
 
   constructor(private ngZone: NgZone, requestService: SongrequestService, private ip: IpService, private http: HttpClient) {
