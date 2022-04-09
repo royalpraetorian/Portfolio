@@ -135,7 +135,7 @@ export class SongRequestWidgetComponent implements OnInit {
   }
 
   entrySelect(selection: AutocompleteEntry){
-    if(selection.learning)
+    if(!selection.learning)
     {
       this.songSelected = true;
       this.selectedSong = selection;

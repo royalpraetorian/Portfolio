@@ -6,7 +6,9 @@
     </app-displaybox> -->
     <iframe id="learningSongsPlaylist" src="https://open.spotify.com/embed/playlist/41w7JMfHRR9OnfZosICDIC?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
     <app-song-request-widget id="songRequestWidget"></app-song-request-widget>
-    <div class="youtubePlayer" *ngFor="let video of videos; index as i;">
-        <youtube-player videoId="{{video.snippet.resourceId.videoId}}"></youtube-player>            
+    <div id="videosGrid">
+        <div class="youtubePlayer" *ngFor="let video of videos; index as i;">
+            <youtube-player videoId="{{video.snippet.resourceId.videoId}}"></youtube-player>            
+        </div>
     </div>
 </div>

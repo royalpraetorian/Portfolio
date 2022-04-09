@@ -9,6 +9,26 @@
     left: 50%
     transform: translate(-50%)
 
+.mat-card-image
+    position: relative
+    @media (max-height: 800px)
+        max-width: calc(100% + 32px)
+        height: 20vh
+        width: calc(20vh * 1.0194)
+        left: 50%
+        transform: translate(-50%)
+        margin: 0px
+    @media (min-height: 800px)
+        width: calc(100% + 32px)
+        max-height: none
+        margin: 0 -16px 16px -16px
+    
+mat-card-content
+    @media (max-height: 800px)
+        font-size: 12px
+    @media (min-height: 800px)
+        font-size: 14px
+
 .intro-actions
     position: relative
     left: 50%
