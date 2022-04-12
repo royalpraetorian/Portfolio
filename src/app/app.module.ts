@@ -32,6 +32,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { NgMarqueeModule } from 'ng-marquee-improved';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxMarqueeComponent, NgxMarqueeModule } from 'ngx-marquee';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { NgxMarqueeComponent, NgxMarqueeModule } from 'ngx-marquee';
     NgxSpinnerModule
   ],
   providers: [
-    ContactService
+    ContactService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
