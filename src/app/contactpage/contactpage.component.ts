@@ -55,7 +55,7 @@ export class ContactpageComponent implements OnInit {
       formData.append("message", this.formGroup.get("Message")?.value);
       this.isLoading = true;
       this.submitted = false;
-      this.http.post<Object>("http://34.125.165.183:3000/contact", formData).subscribe(
+      this.http.post<Object>("http://54.219.159.46:3000/contact", formData).subscribe(
         (response: any) => {
           console.log(response);
           console.log(response.result);
